@@ -1,0 +1,22 @@
+table {float:left;font:13px arial;font-weight:bold;}
+.cell-gray {background:#666;color:#fff;}
+.cell-blue {background:#90A1C8;}
+.cell-left {text-align:left;}
+.cell-center {text-align:center;}
+.cell-right {text-align:right;}
+.float-left {background:#90A1C8;float:left;}
+.float-right {background:#90A1C8;float:right;}
+
+#cpl {font:13px arial;font-weight:bold;margin-bottom:20px;}
+#cpl h2 {font:24px arial;font-weight:bold;}
+#cpl h3 {cfont:16px arial;font-weight:bold;}
+.form {color:#666;float:left;font:13px arial;font-weight:bold;width:760px;}
+.form-box {float:left;width:33%;}
+input, select {color:#666;}
+#totalkWhusage {margin-left:13px;}
+#cityLimits {padding:1px 0 1px 0;width:159px;}
+#customerType {padding:1px 0 1px 0;}
+#fcr {padding:1px 0 1px 0;}
+#salesTax {width:35px;}
+.billTotal {color:#999;font-weight:bold;font-size:28px;margin-left:10px;}
+.clearboth {clear:both;}
