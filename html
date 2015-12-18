@@ -1,0 +1,169 @@
+<div id="cpl">
+
+<div class="form">
+	<h2>Power & Light Rate Calculator</h2>
+	<h3>Information about your operation</h3>
+	<div class="form-box">
+		<p>Billing Demand: <input id="billingDemand" type="text" min="1" max="1000000" size="5" /> kW</p>
+		<p>Monthly kWh: <input id="totalkWhusage" type="text" min="1" max="1000000" size="5" onchange="calculateRate()"> kWh</p>
+	</div>
+	<div class="form-box">
+		<p><select id="cityLimits" onchange="calculateRate()">
+				<option selected>Inside City Limits</option>
+				<option>Outside City Limits</option>
+		</select></p>
+		<p><select id="customerType" onchange="calculateRate()">
+				<option selected>Commercial Customer</option>
+				<option>Industrial Customer</option>
+		</select></p>
+	</div>
+	<div class="form-box">
+		<p><select id="fcr" onchange="calculateRate()">
+				<option selected>Secondary Winter FCR</option>
+				<option>First Winter FCR</option>
+		</select></p>
+		<p><input id="salesTax" type="number" min="4" max="12" value="7" step="1" width="2" onchange="calculateRate()"> Sales Tax</p>
+		<p>Your Bill Total<span class="billTotal">$766.32</span></p>
+	</div>
+</div>
+
+<div class="clearboth"></div>
+
+<table width="760" border="1" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <th width="75" scope="col"><div align="left"></div></th>
+      <th width="400" scope="col"><div align="left">Description</div></th>
+      <th width="85" scope="col"><div class="cell-center">A. Amount</div></th>
+      <th width="85" scope="col"><div class="cell-center">B. Rate</div></th>
+      <th width="85" scope="col"><div class="cell-center">C. Net</div></th>
+    </tr>
+    <tr>
+      <td><div class="cell-gray cell-left">Line 1</div></td>
+      <td><div class="cell-gray cell-right">Basic Service Charge</div></td>
+      <td><div id="line1a" class="cell-gray">&nbsp;</div></td>
+      <td><div id="line1b" class="cell-blue cell-center"></div></td>
+      <td><div id="line1c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 2</div></td>
+      <td class="cell-blue"><div align="right" class="cell-blue"><span class="float-left">First 200 HUD Bucket</span><span class="float-right">First 25</span></div></td>
+      <td><div id="line2a" class="cell-center"></div></td>
+      <td><div id="line2b" class="cell-blue cell-center"></div></td>
+      <td><div id="line2c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 3</div></td>
+      <td><div class="cell-blue cell-right">Next 2,975 kWh</div></td>
+      <td><div id="line3a" class="cell-center"></div></td>
+      <td><div id="line3b" class="cell-blue cell-center"></div></td>
+      <td><div id="line3c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 4</div></td>
+      <td><div class="cell-blue cell-right">Next 7,000 kWh</div></td>
+      <td><div id="line4a" class="cell-center"></div></td>
+      <td><div id="line4b" class="cell-blue cell-center"></div></td>
+      <td><div id="line4c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 5</div></td>
+      <td><div class="cell-blue cell-right">Over 10,000 kWh</div></td>
+      <td><div id="line5a" class="cell-center"></div></td>
+      <td><div id="line5b" class="cell-blue cell-center"></div></td>
+      <td><div id="line5c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 6</div></td>
+      <td><div class="cell-blue cell-left">200 - 400 HUD Bucket</div></td>
+      <td><div id="line6a" class="cell-center"></div></td>
+      <td><div id="line6b" class="cell-blue cell-center"></div></td>
+      <td><div id="line6c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 7</div></td>
+      <td><div class="cell-blue cell-left">400 - 600 HUD Bucket</div></td>
+      <td><div id="line7a" class="cell-center"></div></td>
+      <td><div id="line7b" class="cell-blue cell-center"></div></td>
+      <td><div id="line7c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 8</div></td>
+      <td><div class="cell-blue cell-left">Over 600 HUD Bucket</div></td>
+      <td><div id="line8a" class="cell-center"></div></td>
+      <td><div id="line8b" class="cell-blue cell-center"></div></td>
+      <td><div id="line8c" class="sum cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-gray cell-left">Line 9</div></td>
+      <td><div class="cell-gray cell-right">Base Rate Sub-Total</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div id="line9c" class="subtotal cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 10</div></td>
+      <td><div class="cell-blue cell-left">Environment Compliance Cost recovery (ECCR)</div></td>
+      <td><div id="line10a" class="cell-center"></div></td>
+      <td><div id="line10b" class="cell-blue cell-center"></div></td>
+      <td><div id="line10c" class="cell-center sum"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 11</div></td>
+      <td><div class="cell-blue cell-left">Nuclear Construction Cost Recovery (NCCR)</div></td>
+      <td><div id="line11a" class="cell-center"></div></td>
+      <td><div id="line11b" class="cell-blue cell-center"></div></td>
+      <td><div id="line11c" class="cell-center sum"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 12</div></td>
+      <td><div class="cell-blue cell-left">Demand Side Management (DSM-R or DSM-C)</div></td>
+      <td><div id="line12a" class="cell-center"></div></td>
+      <td><div id="line12b" class="cell-blue cell-center"></div></td>
+      <td><div id="line12c" class="cell-center sum"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 13</div></td>
+      <td><div class="cell-blue cell-left">Fuel Cost Recovery (FCR)</div></td>
+      <td><div id="line13a" class="cell-center"></div></td>
+      <td><div id="line13b" class="cell-blue cell-center"></div></td>
+      <td><div id="line13c" class="cell-center sum"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-gray cell-left">Line 14</div></td>
+      <td><div class="cell-gray cell-right">Sub-Total</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div id="line14c" class="total cell-center"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 15</div></td>
+      <td><div class="cell-blue cell-left">Municiple Franchise Fee</div></td>
+      <td><div id="line15a" class="cell-center"></div></td>
+      <td><div id="line15b" class="cell-blue cell-center"></div></td>
+      <td><div id="line15c" class="cell-center sum"></div></td>
+    </tr>
+    <tr>
+      <td><div align="left" class="cell-gray">Line 16</div></td>
+      <td><div class="cell-gray cell-right">Pretax Sub-Total</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div id="line16c" class="cell-center subtotal"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-blue cell-left">Line 17</div></td>
+      <td><div class="cell-blue cell-left">Sales Tax</div></td>
+      <td><div id="line17a" class="cell-center"></div></td>
+      <td><div id="line17b" class="cell-blue cell-center"></div></td>
+      <td><div id="line17c" class="cell-center sum"></div></td>
+    </tr>
+    <tr>
+      <td><div class="cell-gray cell-left">Line 18</div></td>
+      <td><div class="cell-gray cell-right">Regular Bill Total</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div class="cell-gray">&nbsp;</div></td>
+      <td><div id="line18c" class="cell-center total"></div></td>
+    </tr>
+  </tbody>
+</table>
+</cpl>
